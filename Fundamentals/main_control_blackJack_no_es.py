@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from control_blackJack_no_es import Agent
 
 if __name__ == '__main__':
-    env = gym.make('Blackjack-v0')
+    env = gym.make('Blackjack-v1')
     agent = Agent(eps=0.001)
     n_episodes = 200000
     win_lose_draw = {-1:0, 0:0, 1:0}
@@ -15,11 +15,12 @@ if __name__ == '__main__':
         if i % 50000 == 0:
             rates = win_rates[-1] if win_rates else 0.0
             print('starting episode', i, 'win rate %.3f' % rates)
-        observation = env.reset()
+        observation, info = env.reset()
         done = False
         while not done:
             action = agent.choose_action(observation)
-            observation_, reward, done, info = env.step(action)
+            observation_, reward, term, trunc, info = env.step(action)
+            done = term or trunc
             agent.memory.append((observation, action, reward))
             observation = observation_
         agent.update_Q()

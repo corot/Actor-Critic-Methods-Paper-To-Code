@@ -24,11 +24,12 @@ if __name__ == '__main__':
     scores = []
     for i in range(n_games):
         done = False
-        observation = env.reset()
+        observation, info = env.reset()
         score = 0
         while not done:
             action = agent.choose_action(observation)
-            observation_, reward, done, info = env.step(action)
+            observation_, reward, term, trunc, info = env.step(action)
+            done = term or trunc
             score += reward
             agent.store_rewards(reward)
             observation = observation_

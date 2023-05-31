@@ -10,11 +10,12 @@ if __name__ == '__main__':
     for i in range(n_episodes):
         if i % 50000 == 0:
             print('starting episode', i)
-        observation = env.reset()
+        observation, info = env.reset()
         done = False
         while not done:
             action = agent.policy(observation)
-            observation_, reward, done, info = env.step(action)
+            observation_, reward, term, trunc, info = env.step(action)
+            done = term or trunc
             agent.memory.append((observation, reward))
             observation = observation_
         agent.update_V()

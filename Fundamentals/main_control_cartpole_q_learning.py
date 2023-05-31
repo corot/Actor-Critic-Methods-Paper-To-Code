@@ -53,13 +53,14 @@ if __name__ == '__main__':
     scores = []
 
     for i in range(n_games):
-        observation = env.reset()
+        observation, info = env.reset()
         done = False
         score = 0
         state = digitizer.digitize(observation)
         while not done:
             action = agent.choose_action(state)
-            observation_, reward, done, info = env.step(action)
+            observation_, reward, term, trunc, info = env.step(action)
+            done = term or trunc
             state_ = digitizer.digitize(observation_)
             agent.learn(state, action, reward, state_)
             state = state_

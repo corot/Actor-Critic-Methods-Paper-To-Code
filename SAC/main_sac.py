@@ -34,12 +34,13 @@ if __name__ == '__main__':
         env.render(mode='human')
     steps = 0
     for i in range(n_games):
-        observation = env.reset()
+        observation, info = env.reset()
         done = False
         score = 0
         while not done:
             action = agent.choose_action(observation)
-            observation_, reward, done, info = env.step(action)
+            observation_, reward, term, trunc, info = env.step(action)
+            done = term or trunc
             steps += 1
             agent.remember(observation, action, reward, observation_, done)
             if not load_checkpoint:
