@@ -5,12 +5,14 @@
 #os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 # import pybullet_envs
 import sys
-import gym
+import gymnasium as gym
 import numpy as np
+
 from sac_torch import Agent
 
 sys.path.append('..')  # add parent directory to PYTHONPATH to import common utils
 from utils import plot_learning_curve, read_arguments
+
 
 if __name__ == '__main__':
     args = read_arguments()

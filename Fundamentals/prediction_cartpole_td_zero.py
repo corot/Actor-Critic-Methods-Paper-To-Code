@@ -1,5 +1,5 @@
 import numpy as np
-import gym
+import gymnasium as gym
 
 def simple_policy(state):
     action = 0 if state < 5 else 1

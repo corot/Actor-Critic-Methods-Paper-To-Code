@@ -1,4 +1,4 @@
-import gym
+import gymnasium as gym
 import numpy as np
 from prediction_blackJack import Agent
 import matplotlib.pyplot as plt

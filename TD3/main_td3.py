@@ -1,5 +1,5 @@
 import sys
-import gym
+import gymnasium as gym
 import numpy as np
 from td3_torch import Agent
 

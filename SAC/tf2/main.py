@@ -1,5 +1,5 @@
 import pybullet_envs
-import gym
+import gymnasium as gym
 import numpy as np
 from agent import Agent
 from utils import plot_learning_curve, manage_memory

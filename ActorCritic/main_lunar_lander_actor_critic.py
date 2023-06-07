@@ -1,4 +1,4 @@
-import gym
+import gymnasium as gym
 import numpy as np
 from actor_critic_torch import Agent
 from utils import plot_learning_curve
