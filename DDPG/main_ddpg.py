@@ -1,21 +1,30 @@
+import sys
 import gym
 import numpy as np
 from ddpg_torch import Agent
-from utils import plot_learning_curve
+
+sys.path.append('..')  # add parent directory to PYTHONPATH to import common utils
+from utils import plot_learning_curve, read_arguments
 
 if __name__ == '__main__':
-    env = gym.make('LunarLanderContinuous-v2')
+    args = read_arguments()
+
+    env = gym.make('LunarLanderContinuous-v2', render_mode="human" if args.render else None)
     agent = Agent(alpha=0.0001, beta=0.001, 
                     input_dims=env.observation_space.shape, tau=0.001,
                     batch_size=64, fc1_dims=400, fc2_dims=300, 
                     n_actions=env.action_space.shape[0])
-    n_games = 1000
+    n_games = 1500
     filename = 'LunarLander_alpha_' + str(agent.alpha) + '_beta_' + \
                 str(agent.beta) + '_' + str(n_games) + '_games'
     figure_file = 'plots/' + filename + '.png'
 
     best_score = env.reward_range[0]
     score_history = []
+
+    if args.load:
+        agent.load_models()
+
     for i in range(n_games):
         observation, info = env.reset()
         done = False
