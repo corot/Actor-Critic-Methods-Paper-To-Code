@@ -10,7 +10,7 @@ from utils import plot_learning_curve, read_arguments
 if __name__ == '__main__':
     args = read_arguments()
 
-    #env_id = 'HalfCheetahBulletEnv-v0'
+    env_id = 'HalfCheetahBulletEnv-v0'
     #env_id = 'HopperBulletEnv-v0'
     env_id = 'LunarLanderContinuous-v2'
     env_id = 'BipedalWalker-v3'
